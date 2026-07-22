@@ -32,6 +32,9 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 .memory-grid img:nth-child(4){grid-column:2;grid-row:3}
 .memory-grid img:nth-child(5){grid-column:1/3;grid-row:4}
 .notice-link img{height:auto !important;aspect-ratio:auto !important;object-fit:contain !important}
+.flower-content{max-width:720px;margin:22px auto 0;display:flex;flex-direction:column;align-items:center;gap:22px}
+.flower-qr{width:176px;height:176px;object-fit:contain;background:#fff;border:1px solid rgba(169,139,93,.28);border-radius:8px;padding:8px;box-shadow:0 8px 24px rgba(80,60,30,.1);display:block}
+.contact-link{color:#8a6f45;text-decoration:none;border-bottom:1px solid rgba(138,111,69,.35)}
 @media (min-width:760px){
   .brand-block{padding:38px 64px 6px !important}
   .hero-section{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(330px,1.1fr);align-items:center;gap:72px;padding:38px 88px 52px !important}
@@ -48,7 +51,8 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   .memory-grid{gap:14px !important}
   .notice-section{padding:12px 64px 50px !important}
   .notice-link{width:min(380px,48%) !important}
-  .thanks-section{padding:42px 80px !important}
+  .thanks-section{padding:46px 80px 50px !important}
+  .flower-content{display:grid;grid-template-columns:minmax(0,1fr) 176px;text-align:left;gap:38px}
   .closing-section{padding:48px 80px !important}
   .message-section{padding:52px 64px !important}
   .message-section>#formWrap,.message-section>#doneWrap{max-width:700px;margin-left:auto;margin-right:auto}
@@ -129,16 +133,17 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   </div>
 
   <div class="ceremony-section reveal-section" style="background:#F2ECE0;padding:36px 40px 40px">
-    <div style="text-align:center;margin-bottom:22px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">CEREMONY</div><h2 style="margin:6px 0 0;font:500 26px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">弔唁與追思</h2></div>
+    <div style="text-align:center;margin-bottom:22px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">CEREMONY</div><h2 style="margin:6px 0 0;font:500 26px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">告別式與追思</h2></div>
     <div class="ceremony-content">
       <div class="ceremony-card" style="background:#fff;border:1px solid rgba(169,139,93,.28);border-radius:10px;padding:8px 22px">
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">故人</span><span style="font:500 15px 'Noto Serif TC'">吳啓誠府君</span></div>
         <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">辭世</span><span style="font:400 14.5px 'Noto Serif TC'">中華民國 115 年 7 月 16 日　享壽 64 歲</span></div>
-        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">弔唁堂</span><span style="font:400 14.5px 'Noto Serif TC'">7 月 23 日 — 7 月 29 日　每日 10:00 – 17:00</span></div>
-        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">地點</span><span style="font:400 14.5px 'Noto Serif TC'">臥龍 17 行館<br>臺北市大安區臥龍街 188 巷 17 號 1 樓</span></div>
-        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">追思會</span><span style="font:400 14.5px 'Noto Serif TC'">115 年 8 月 9 日（星期日）08:40 – 10:00<br><span style="font-size:12.5px;color:#9a8560">通知另發</span></span></div>
-        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">家屬</span><span style="font:400 14.5px 'Noto Serif TC'">孝男 立凡　孝女 立勻・立心　敬啟</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">告別式</span><span style="font:400 14.5px 'Noto Serif TC'">民國 115 年 8 月 9 日</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">地點</span><span style="font:400 14.5px 'Noto Serif TC'">臺北市懷愛館景行樓一樓【至忠四廳】<br>臺北市大安區辛亥路三段 330 號</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">追思會</span><span style="font:500 14.5px 'Noto Serif TC'">上午 8 時 40 分</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">聯絡處</span><span style="font:400 14.5px 'Noto Serif TC'">臺北市內湖區金湖路 347 巷 121 弄 2 之 1 號 4 樓<br>行動：<a class="contact-link" href="tel:0939360666">0939-360-666</a></span></div>
       </div>
-      <div class="ceremony-map" style="margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid rgba(169,139,93,.25);aspect-ratio:16/9;background:#EAE1D2"><iframe title="會場地圖" src="https://maps.google.com/maps?q=%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E8%87%A5%E9%BE%8D%E8%A1%97188%E5%B7%B717%E8%99%9F&amp;z=16&amp;output=embed" style="width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.12)" loading="lazy"></iframe></div>
+      <div class="ceremony-map" style="margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid rgba(169,139,93,.25);aspect-ratio:16/9;background:#EAE1D2"><iframe title="臺北市懷愛館會場地圖" src="https://maps.google.com/maps?q=%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E8%BE%9B%E4%BA%A5%E8%B7%AF%E4%B8%89%E6%AE%B5330%E8%99%9F&amp;z=16&amp;output=embed" style="width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.12)" loading="lazy"></iframe></div>
     </div>
   </div>
 
@@ -160,8 +165,15 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   </div>
 
   <div class="thanks-section reveal-section" style="background:#F2ECE0;padding:34px 44px;text-align:center">
-    <div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">WITH THANKS</div><h2 style="margin:6px 0 14px;font:500 24px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">懇辭花籃花圈</h2>
-    <p style="margin:0 auto;max-width:34ch;font:400 14.5px/2 'Noto Serif TC';color:#5c5348;text-wrap:pretty">因弔唁堂空間有限，懇辭花籃、花圈等一切弔唁物品。諸承厚誼，敬感哀忱。</p>
+    <div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">FLOWER TRIBUTE</div><h2 style="margin:6px 0 0;font:500 24px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">訂花資訊</h2>
+    <div class="flower-content">
+      <div>
+        <p style="margin:0;font:400 14.5px/2 'Noto Serif TC';color:#5c5348;text-wrap:pretty">為便於會場統一佈置，如蒙惠賜花籃，請於 8 月 6 日下午 5 時前洽台灣仁本服務集團北醫事業處─許輝凱。</p>
+        <p style="margin:12px 0 0;font:500 15px/1.8 'Noto Sans TC';color:#4a4238">行動：<a class="contact-link" href="tel:0970444902">0970-444-902</a></p>
+        <p style="margin:8px 0 0;font:400 12.5px/1.7 'Noto Sans TC';color:#8f8267">請先掃描 QR Code 以便聯繫</p>
+      </div>
+      <a href="uploads/flower-order-qr.jpg" target="_blank" rel="noopener" aria-label="放大訂花聯繫 QR Code"><img class="flower-qr" src="uploads/flower-order-qr.jpg" alt="訂花聯繫 QR Code" width="198" height="198" loading="lazy"></a>
+    </div>
   </div>
 
   <div class="closing-section reveal-section" style="padding:40px 44px;text-align:center">
@@ -176,7 +188,7 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     <div id="formWrap" style="display:flex;flex-direction:column;gap:15px">
       <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">顯示名稱</label><input id="fName" placeholder="您的稱呼，例：張小明 敬上" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;padding:12px 14px;font:400 14px 'Noto Sans TC';color:#F7EFDF;outline:none"></div>
       <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">留言</label><textarea id="fMessage" rows="3" placeholder="寫下想對他說的話…" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;padding:12px 14px;font:400 14px/1.7 'Noto Sans TC';color:#F7EFDF;outline:none;resize:none"></textarea></div>
-      <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">預計出席追思會人數 <span style="display:inline-block;margin-left:5px;font-weight:400;color:#a99b80">（8 月 9 日 08:40–10:00）</span></label>
+      <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">預計出席追思會人數 <span style="display:inline-block;margin-left:5px;font-weight:400;color:#a99b80">（8 月 9 日 上午 8:40）</span></label>
         <div style="display:flex;align-items:center;gap:0;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;overflow:hidden;width:fit-content">
           <button id="attDec" type="button" style="width:48px;height:46px;background:transparent;border:none;color:#c7a25a;font-size:22px;cursor:pointer;line-height:1">−</button>
           <div style="min-width:70px;text-align:center;font:600 18px 'Cormorant Garamond',serif;color:#F7EFDF;border-left:1px solid rgba(199,162,90,.25);border-right:1px solid rgba(199,162,90,.25);padding:0 8px;height:46px;display:flex;align-items:center;justify-content:center"><span id="attVal">1</span>&nbsp;人</div>
