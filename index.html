@@ -17,6 +17,9 @@ input,textarea,button{font-family:inherit}
 input::placeholder,textarea::placeholder{color:#8f8267}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.reveal-section{opacity:1;transform:none}
+.reveal-enabled .reveal-section{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,.65,.3,1);will-change:opacity,transform}
+.reveal-enabled .reveal-section.is-visible{opacity:1;transform:none}
 .share-btn{transition:background .2s,color .2s,border-color .2s}
 .share-btn:hover{background:#a98b5d;color:#fff !important;border-color:#a98b5d !important}
 .page-shell{width:100%;min-height:100vh;min-height:100dvh}
@@ -95,12 +98,12 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 
   <div class="ornament" style="display:flex;align-items:center;justify-content:center;gap:14px;padding:0 0 30px"><span style="height:1px;width:46px;background:rgba(169,139,93,.55)"></span><span style="width:6px;height:6px;background:#a98b5d;transform:rotate(45deg)"></span><span style="height:1px;width:46px;background:rgba(169,139,93,.55)"></span></div>
 
-  <div class="intro-section" style="padding:0 44px 40px;text-align:center">
+  <div class="intro-section reveal-section" style="padding:0 44px 40px;text-align:center">
     <p class="intro-quote" style="margin:0;font:600 25px/1.55 'Cormorant Garamond',serif;letter-spacing:.08em;color:#4a4238"><span style="display:block">Trustworthy</span><span style="display:block">Accountability</span><span style="display:block">Integrity</span></p>
     <p style="margin:22px 0 0;font:400 15px/2 'Noto Serif TC',serif;color:#5c5348;text-wrap:pretty">我們摯愛的父親，已圓滿完成這一段生命旅程。他的音容笑貌與溫暖身影，將長存於我們心中。誠摯邀請親友帶著平靜溫暖的心，一同追思、懷念，陪伴父親走完人生最後一程。</p>
   </div>
 
-  <div class="ceremony-section" style="background:#F2ECE0;padding:36px 40px 40px">
+  <div class="ceremony-section reveal-section" style="background:#F2ECE0;padding:36px 40px 40px">
     <div style="text-align:center;margin-bottom:22px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">CEREMONY</div><h2 style="margin:6px 0 0;font:500 26px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">弔唁與追思</h2></div>
     <div class="ceremony-card" style="background:#fff;border:1px solid rgba(169,139,93,.28);border-radius:10px;padding:8px 22px">
       <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">辭世</span><span style="font:400 14.5px 'Noto Serif TC'">中華民國 115 年 7 月 16 日　享壽 64 歲</span></div>
@@ -112,7 +115,7 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     <div class="ceremony-map" style="margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid rgba(169,139,93,.25);aspect-ratio:16/9;background:#EAE1D2"><iframe title="會場地圖" src="https://maps.google.com/maps?q=%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E8%87%A5%E9%BE%8D%E8%A1%97188%E5%B7%B717%E8%99%9F&amp;z=16&amp;output=embed" style="width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.12)" loading="lazy"></iframe></div>
   </div>
 
-  <div class="memories-section" style="padding:38px 40px 30px">
+  <div class="memories-section reveal-section" style="padding:38px 40px 30px">
     <div style="text-align:center;margin-bottom:22px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">MEMORIES</div><h2 style="margin:6px 0 0;font:500 26px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">生命剪影</h2></div>
     <div class="memory-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
       <img src="uploads/memory-family-lake.jpg" alt="家人於湖畔相聚的旅行回憶" width="1400" height="1050" loading="lazy" style="grid-column:1/3;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 58%;border:1px solid rgba(169,139,93,.25);border-radius:8px;display:block">
@@ -123,30 +126,30 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     </div>
   </div>
 
-  <div class="notice-section" style="padding:8px 40px 40px;text-align:center">
+  <div class="notice-section reveal-section" style="padding:8px 40px 40px;text-align:center">
     <h2 style="margin:0 0 4px;font:500 22px 'Noto Serif TC',serif;letter-spacing:.1em;padding-left:.1em">弔唁啟事</h2>
     <div style="font:400 12px 'Noto Sans TC';color:#9a8560;margin-bottom:16px">點擊可放大</div>
     <a class="notice-link" href="uploads/fnail_弔唁_v1-02.jpg" target="_blank" rel="noopener" style="display:block;width:66%;margin:0 auto"><img src="uploads/fnail_弔唁_v1-02.jpg" alt="吳啓誠先生 弔唁啟事" width="1671" height="2506" loading="lazy" style="width:100%;border:1px solid rgba(169,139,93,.3);border-radius:6px;box-shadow:0 8px 24px rgba(80,60,30,.12);display:block"></a>
   </div>
 
-  <div class="thanks-section" style="background:#F2ECE0;padding:34px 44px;text-align:center">
+  <div class="thanks-section reveal-section" style="background:#F2ECE0;padding:34px 44px;text-align:center">
     <div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">WITH THANKS</div><h2 style="margin:6px 0 14px;font:500 24px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">懇辭花籃花圈</h2>
     <p style="margin:0 auto;max-width:34ch;font:400 14.5px/2 'Noto Serif TC';color:#5c5348;text-wrap:pretty">因弔唁堂空間有限，懇辭花籃、花圈等一切弔唁物品。諸承厚誼，敬感哀忱。</p>
   </div>
 
-  <div class="closing-section" style="padding:40px 44px;text-align:center">
+  <div class="closing-section reveal-section" style="padding:40px 44px;text-align:center">
     <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:22px"><span style="height:1px;width:34px;background:rgba(169,139,93,.5)"></span><span style="width:5px;height:5px;background:#a98b5d;transform:rotate(45deg)"></span><span style="height:1px;width:34px;background:rgba(169,139,93,.5)"></span></div>
     <p class="closing-quote" style="margin:0;font:500 20px/1.9 'Noto Serif TC';letter-spacing:.04em;color:#4a4238">我們不道別<br>因為終將在未來以任何形式再會</p>
     <p style="margin:18px auto 0;max-width:40ch;font:400 14px/2 'Noto Serif TC';color:#6b6055;text-wrap:pretty">誠摯感謝您的關懷與慰問。長輩與親友所給予的雲情高誼，我們銘感於心。居喪期間不克踵謝，謹致上衷心的感激。</p>
   </div>
 
-  <div class="message-section" style="background:#2B2723;color:#EDE4D3;padding:42px 40px">
+  <div class="message-section reveal-section" style="background:#2B2723;color:#EDE4D3;padding:42px 40px">
     <div style="text-align:center;margin-bottom:24px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#c7a25a;padding-left:.4em">MESSAGE</div><h2 style="margin:6px 0 6px;font:500 27px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em;color:#F7EFDF">點一盞心燈</h2><div style="font:400 13px 'Noto Sans TC';color:#a99b80">留下您的思念與祝福，並登記出席人數</div></div>
 
     <div id="formWrap" style="display:flex;flex-direction:column;gap:15px">
       <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">顯示名稱</label><input id="fName" placeholder="您的稱呼，例：張小明 敬上" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;padding:12px 14px;font:400 14px 'Noto Sans TC';color:#F7EFDF;outline:none"></div>
       <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">留言</label><textarea id="fMessage" rows="3" placeholder="寫下想對他說的話…" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;padding:12px 14px;font:400 14px/1.7 'Noto Sans TC';color:#F7EFDF;outline:none;resize:none"></textarea></div>
-      <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">預計出席追思會人數</label>
+      <div><label style="display:block;font:500 13px 'Noto Sans TC';color:#c7a25a;margin-bottom:7px">預計出席追思會人數 <span style="display:inline-block;margin-left:5px;font-weight:400;color:#a99b80">（8 月 9 日 08:40–10:00）</span></label>
         <div style="display:flex;align-items:center;gap:0;background:rgba(255,255,255,.06);border:1px solid rgba(199,162,90,.35);border-radius:8px;overflow:hidden;width:fit-content">
           <button id="attDec" type="button" style="width:48px;height:46px;background:transparent;border:none;color:#c7a25a;font-size:22px;cursor:pointer;line-height:1">−</button>
           <div style="min-width:70px;text-align:center;font:600 18px 'Cormorant Garamond',serif;color:#F7EFDF;border-left:1px solid rgba(199,162,90,.25);border-right:1px solid rgba(199,162,90,.25);padding:0 8px;height:46px;display:flex;align-items:center;justify-content:center"><span id="attVal">1</span>&nbsp;人</div>
@@ -170,12 +173,12 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     </div>
   </div>
 
-  <div id="latestWrap" class="latest-section" style="padding:34px 40px 10px">
+  <div id="latestWrap" class="latest-section reveal-section" style="padding:34px 40px 10px">
     <h3 style="margin:0 0 18px;text-align:center;font:500 20px 'Noto Serif TC';letter-spacing:.1em;padding-left:.1em;color:#4a4238">溫暖的話語</h3>
     <div id="latestList" style="display:flex;flex-direction:column;gap:12px"></div>
   </div>
 
-  <div class="share-section" style="padding:30px 40px 34px;text-align:center">
+  <div class="share-section reveal-section" style="padding:30px 40px 34px;text-align:center">
     <div style="font:400 12px 'Noto Sans TC';letter-spacing:.2em;color:#9a8560;margin-bottom:14px">分享這個追思頁面</div>
     <div style="display:flex;justify-content:center;gap:12px">
       <a id="shareFb" href="#" target="_blank" rel="noopener" class="share-btn" style="width:42px;height:42px;border-radius:50%;border:1px solid rgba(169,139,93,.4);display:flex;align-items:center;justify-content:center;color:#8a6f45"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9c0-.9.3-1.5 1.6-1.5H16V4.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H7v3h2.6v8H13z"/></svg></a>
@@ -186,11 +189,11 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 
   <div class="page-footer" style="border-top:1px solid rgba(169,139,93,.22);padding:22px;text-align:center;font:400 11.5px/1.8 'Noto Sans TC';color:#a99a80">孝男 立凡　孝女 立勻・立心　敬啟<br>© 2026 追思．永懷．吳啓誠</div>
 
-  <button id="musicBtn" class="music-button" type="button" title="背景音樂" style="position:fixed;bottom:22px;right:22px;width:52px;height:52px;border-radius:50%;background:#FAF6EF;border:1px solid rgba(169,139,93,.5);box-shadow:0 6px 20px rgba(80,60,30,.2);display:flex;align-items:center;justify-content:center;color:#a98b5d;cursor:pointer;z-index:50">
+  <button id="musicBtn" class="music-button" type="button" title="播放背景音樂" aria-label="播放背景音樂" aria-pressed="false" style="position:fixed;bottom:22px;right:22px;width:52px;height:52px;border-radius:50%;background:#FAF6EF;border:1px solid rgba(169,139,93,.5);box-shadow:0 6px 20px rgba(80,60,30,.2);display:flex;align-items:center;justify-content:center;color:#a98b5d;cursor:pointer;z-index:50">
     <svg id="iconMuted" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5L6 9H3v6h3l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
     <svg id="iconSound" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
   </button>
-  <audio id="bgAudio" src="背景音樂.mp3" loop preload="none"></audio>
+  <audio id="bgAudio" src="uploads/background-music.m4a" loop preload="metadata"></audio>
 
 </div>
 
@@ -211,6 +214,7 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   var state = { attendees:1, photoData:"", photoName:"", submitting:false, submitted:false, muted:true, live:null };
 
   var SAMPLES = [
+    {name:"孫維仁", message:"敬悼　吳啓誠先生", photo:"uploads/S__6791288.jpg"},
     {name:"淑芬 敬上", message:"願您一路好走，我們會永遠記得您溫暖的笑容。", photo:""},
     {name:"建宏", message:"謝謝您這一生的照顧與教導，願天堂沒有病痛。", photo:""}
   ];
@@ -281,11 +285,11 @@ input::placeholder,textarea::placeholder{color:#8f8267}
       var nm = (m.name || "匿名").toString();
       var photo = (m.photo || "").toString();
       var avatar = photo
-        ? '<img src="'+esc(photo)+'" alt="" style="flex:none;width:44px;height:44px;border-radius:50%;object-fit:cover">'
+        ? '<img src="'+esc(photo)+'" alt="'+esc(nm)+' 上傳的照片" style="flex:none;width:68px;height:80px;border-radius:6px;object-fit:contain;background:#201B16;border:1px solid rgba(169,139,93,.22)">'
         : '<div style="flex:none;width:44px;height:44px;border-radius:50%;background:#EAE1D2;display:flex;align-items:center;justify-content:center;color:#a98b5d;font:500 16px \'Noto Serif TC\'">'+esc(nm.trim().charAt(0) || "友")+'</div>';
       return '<div style="display:flex;gap:13px;background:#fff;border:1px solid rgba(169,139,93,.22);border-radius:10px;padding:15px 16px;animation:floatIn .5s ease both">'
         + avatar
-        + '<div><div style="font:600 14px \'Noto Sans TC\';color:#2B2723">'+esc(nm)+'</div><p style="margin:4px 0 0;font:400 14px/1.7 \'Noto Serif TC\';color:#5c5348">'+esc(m.message)+'</p></div>'
+        + '<div style="flex:1;min-width:0"><div style="font:600 14px \'Noto Sans TC\';color:#2B2723">'+esc(nm)+'</div><p style="margin:4px 0 0;font:400 14px/1.7 \'Noto Serif TC\';color:#5c5348">'+esc(m.message)+'</p></div>'
         + '</div>';
     }).join("");
     $("latestList").innerHTML = html;
@@ -311,6 +315,9 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     state.muted = m;
     $("iconMuted").style.display = m ? "block" : "none";
     $("iconSound").style.display = m ? "none" : "block";
+    $("musicBtn").setAttribute("aria-pressed", m ? "false" : "true");
+    $("musicBtn").setAttribute("aria-label", m ? "播放背景音樂" : "暫停背景音樂");
+    $("musicBtn").title = m ? "播放背景音樂" : "暫停背景音樂";
     if(audio){ if(m){ audio.pause(); } else { audio.play().catch(function(){}); } }
   }
   $("musicBtn").addEventListener("click", function(){ setMuted(!state.muted); });
@@ -334,7 +341,27 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     setTimeout(function(){ t.style.transition = "opacity .4s"; t.style.opacity = "0"; setTimeout(function(){ t.remove(); }, 400); }, 1400);
   }
 
+  /* ── 捲動區塊入場 ─────────────────────── */
+  function initReveals(){
+    var items = Array.prototype.slice.call(document.querySelectorAll(".reveal-section"));
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(!items.length || reduceMotion || !("IntersectionObserver" in window)){
+      items.forEach(function(el){ el.classList.add("is-visible"); });
+      return;
+    }
+    document.body.classList.add("reveal-enabled");
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, {threshold:.12, rootMargin:"0px 0px -7% 0px"});
+    items.forEach(function(el){ observer.observe(el); });
+  }
+
   /* ── 啟動 ─────────────────────────────── */
+  initReveals();
   renderLatest();
   loadMessages();
   if(MUSIC_AUTOPLAY && audio){ setMuted(false); }

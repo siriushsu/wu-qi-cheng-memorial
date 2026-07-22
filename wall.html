@@ -127,6 +127,7 @@ img{max-width:100%;height:auto}
 
   /* 留言示意（未接後端時顯示；接上 Apps Script 後由已核可留言取代） */
   var SAMPLES = [
+    {name:"孫維仁", message:"敬悼　吳啓誠先生", photo:"uploads/S__6791288.jpg"},
     {name:"淑芬 敬上", message:"願您一路好走，我們會永遠記得您溫暖的笑容，謝謝您這一生的付出。", photo:"", ph:true},
     {name:"建宏", message:"謝謝您這一生的照顧與教導，願天堂沒有病痛，我們會好好照顧自己。", photo:""},
     {name:"美玲阿姨", message:"啓誠大哥一路好走，您的正直與善良，永遠是我們學習的榜樣。", photo:"", ph:true},
@@ -153,7 +154,7 @@ img{max-width:100%;height:auto}
   var $ = function(id){ return document.getElementById(id); };
   function esc(s){ var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; }
 
-  var state = { messages:[], page:0, fading:false, isNarrow:false, isCompact:false, loaded:false, loading:false, scene:"messages", photoIdx:0, photoFading:false, approvedIds:null, newApprovedIds:{} };
+  var state = { messages:[], page:0, fading:false, isNarrow:false, isCompact:false, isShort:false, loaded:false, loading:false, scene:"messages", photoIdx:0, photoFading:false, approvedIds:null, newApprovedIds:{} };
   var msgKey = null;
   var timers = {};
 
@@ -161,7 +162,7 @@ img{max-width:100%;height:auto}
   function isDemo(){ return !SCRIPT_URL; }
   function eff(){ return isDemo() ? SAMPLES : state.messages; }
   function photos(){ return PHOTOS; }
-  function pageSize(){ return state.isCompact ? 1 : state.isNarrow ? 2 : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage); }
+  function pageSize(){ return state.isCompact ? 1 : state.isNarrow ? 2 : state.isShort ? Math.max(1, CONFIG.columns) : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage); }
   function pages(){ return Math.max(1, Math.ceil(eff().length / pageSize())); }
   function messageId(m){ return String(m.id || [m.time, m.name, m.message].join("|")); }
 
@@ -228,7 +229,7 @@ img{max-width:100%;height:auto}
     var nm = (m.name || "匿名").toString();
     var isNew = !!state.newApprovedIds[messageId(m)];
     var raw = CONFIG.showGuestPhotos ? (m.photo || "").toString() : "";
-    var isReal = /^https?:/i.test(raw);
+    var isReal = /^(?:https?:|data:image\/|uploads\/)/i.test(raw);
     var demoPhoto = !isReal && CONFIG.showGuestPhotos && !!m.ph;
     var noPhoto = !isReal && !demoPhoto;
     var delay = (i * 0.07).toFixed(2) + "s";
@@ -397,9 +398,11 @@ img{max-width:100%;height:auto}
   function onResize(){
     var n = window.innerWidth < 820;
     var c = window.innerWidth < 620 || window.innerHeight < 560;
-    if(n !== state.isNarrow || c !== state.isCompact){
+    var s = window.innerHeight < 850;
+    if(n !== state.isNarrow || c !== state.isCompact || s !== state.isShort){
       state.isNarrow = n;
       state.isCompact = c;
+      state.isShort = s;
       state.page = Math.min(state.page, pages() - 1);
       if(state.scene === "messages") paintMessages();
       paintChrome();
