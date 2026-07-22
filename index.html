@@ -326,7 +326,12 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   function esc(s){ var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; }
   function renderLatest(){
     if(!SHOW_LATEST){ $("latestWrap").style.display = "none"; return; }
-    var raw = (state.live && state.live.length) ? state.live.slice(0,6) : SAMPLES;
+    // 已接後端時只顯示 Google Sheets 的已核准留言；尚未收到回應時先顯示載入狀態。
+    var raw = state.live !== null ? state.live.slice(0,6) : (SCRIPT_URL ? [] : SAMPLES);
+    if(!raw.length){
+      $("latestList").innerHTML = '<div style="padding:22px 16px;text-align:center;border:1px solid rgba(169,139,93,.22);border-radius:10px;background:#fff;color:#8f8267;font:400 13px/1.7 \'Noto Sans TC\'">'+(state.live === null ? '正在讀取留言…' : '目前尚無已核准留言')+'</div>';
+      return;
+    }
     var html = raw.map(function(m){
       var nm = (m.name || "匿名").toString();
       var photo = (m.photo || "").toString();
@@ -410,6 +415,11 @@ input::placeholder,textarea::placeholder{color:#8f8267}
   initReveals();
   renderLatest();
   loadMessages();
+  // 與現場留言牆相同，自動檢查家屬新核准的留言，不需重新整理頁面。
+  if(SCRIPT_URL){
+    setInterval(loadMessages, 5000);
+    document.addEventListener("visibilitychange", function(){ if(!document.hidden) loadMessages(); });
+  }
   if(MUSIC_AUTOPLAY && audio){ setMuted(false); }
 })();
 </script>
