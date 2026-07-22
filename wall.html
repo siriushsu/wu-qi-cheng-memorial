@@ -15,6 +15,10 @@ img{max-width:100%;height:auto}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
 @keyframes newGlow{0%{box-shadow:0 0 0 2px rgba(201,164,92,.75),0 14px 40px rgba(0,0,0,.42)}100%{box-shadow:0 14px 40px rgba(0,0,0,.42)}}
+.wall-sound-button{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:30;border:1px solid rgba(201,164,92,.55);border-radius:999px;padding:10px 15px;background:rgba(28,24,20,.82);color:#EFE6D6;box-shadow:0 8px 28px rgba(0,0,0,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 13px 'Noto Sans TC',sans-serif;letter-spacing:.08em;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.wall-sound-button:hover{background:rgba(55,46,36,.94);border-color:#C9A45C}
+.wall-sound-button:active{transform:scale(.97)}
+.wall-sound-button[aria-pressed="true"]{background:rgba(124,98,55,.9);border-color:#D8BB7D}
 .wall-shell{height:100vh;height:100dvh;min-height:0 !important;overflow:hidden}
 .wall-main{min-height:0}
 .wall-portrait{height:auto !important;aspect-ratio:auto !important;object-fit:contain !important}
@@ -60,6 +64,7 @@ img{max-width:100%;height:auto}
   .empty-state{padding:18px 8px !important}
   .empty-title{font-size:20px !important;letter-spacing:.03em !important}
   .empty-copy{font-size:13px !important}
+  .wall-sound-button{right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));padding:8px 12px;font-size:12px}
 }
 @media (max-height:560px){
   .wall-header{justify-content:flex-start !important;gap:14px !important;padding-top:8px !important;padding-bottom:7px !important}
@@ -111,6 +116,9 @@ img{max-width:100%;height:auto}
 
 </div>
 
+<audio id="wallBgAudio" src="uploads/background-music.m4a" loop preload="auto"></audio>
+<button id="wallSoundBtn" class="wall-sound-button" type="button" aria-pressed="false" aria-label="開啟聲音">開啟聲音</button>
+
 <script>
 (function(){
   "use strict";
@@ -160,22 +168,74 @@ img{max-width:100%;height:auto}
   var $ = function(id){ return document.getElementById(id); };
   function esc(s){ var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; }
 
-  var state = { messages:[], page:0, fading:false, isNarrow:false, isCompact:false, isShort:false, loaded:false, loading:false, scene:"messages", photoIdx:0, photoFading:false, approvedIds:null, newApprovedIds:{} };
+  var state = { messages:[], page:0, fading:false, isNarrow:false, isCompact:false, isShort:false, loaded:false, loading:false, scene:"messages", photoIdx:0, photoFading:false, soundEnabled:false, approvedIds:null, newApprovedIds:{} };
   var msgKey = null;
   var timers = {};
+
+  /* ── 聲音：留言／照片播背景音樂，影片播原聲 ─────── */
+  var bgAudio = $("wallBgAudio");
+  var soundBtn = $("wallSoundBtn");
+  function currentPhoto(){
+    var ph = photos();
+    return ph.length ? (ph[state.photoIdx % ph.length] || {}) : {};
+  }
+  function currentVideo(){ return $("photoScene").querySelector("video"); }
+  function updateSoundButton(){
+    soundBtn.setAttribute("aria-pressed", state.soundEnabled ? "true" : "false");
+    soundBtn.setAttribute("aria-label", state.soundEnabled ? "關閉聲音" : "開啟聲音");
+    soundBtn.textContent = state.soundEnabled ? "關閉聲音" : "開啟聲音";
+  }
+  function syncSceneAudio(){
+    var video = currentVideo();
+    var videoScene = state.scene === "photos" && isVideo(currentPhoto().src);
+
+    if(!state.soundEnabled){
+      bgAudio.pause();
+      if(video) video.muted = true;
+      updateSoundButton();
+      return;
+    }
+
+    if(videoScene && video){
+      bgAudio.pause();
+      video.muted = false;
+      video.volume = 1;
+      try{ video.play().catch(function(){}); }catch(e){}
+    } else {
+      if(video){ video.pause(); video.muted = true; }
+      bgAudio.volume = .45;
+      try{ bgAudio.play().catch(function(){}); }catch(e){}
+    }
+    updateSoundButton();
+  }
+  soundBtn.addEventListener("click", function(){
+    state.soundEnabled = !state.soundEnabled;
+    syncSceneAudio();
+  });
 
   /* ── 資料 ─────────────────────────────── */
   function isDemo(){ return !SCRIPT_URL; }
   function eff(){ return isDemo() ? SAMPLES : state.messages; }
   function photos(){ return PHOTOS; }
   function messageLength(m){ return Array.from(String((m && m.message) || "")).length; }
-  function hasLongMessage(){ return eff().some(function(m){ return messageLength(m) > 100; }); }
-  function pageSize(){
-    var base = state.isCompact ? 1 : state.isNarrow ? 2 : state.isShort ? Math.max(1, CONFIG.columns) : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage);
-    // 長留言獨立一頁，避免多張卡片互相擠壓而截斷內容。
-    return hasLongMessage() ? 1 : base;
+  function shortPageCapacity(){
+    return state.isCompact ? 1 : state.isNarrow ? 2 : state.isShort ? Math.max(1, CONFIG.columns) : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage);
   }
-  function pages(){ return Math.max(1, Math.ceil(eff().length / pageSize())); }
+  function messagePages(){
+    var result = [], batch = [], capacity = shortPageCapacity();
+    eff().forEach(function(m){
+      if(messageLength(m) > 100){
+        if(batch.length){ result.push(batch); batch = []; }
+        result.push([m]);
+      } else {
+        batch.push(m);
+        if(batch.length >= capacity){ result.push(batch); batch = []; }
+      }
+    });
+    if(batch.length) result.push(batch);
+    return result;
+  }
+  function pages(){ return Math.max(1, messagePages().length); }
   function messageId(m){ return String(m.id || [m.time, m.name, m.message].join("|")); }
 
   function load(){
@@ -270,12 +330,11 @@ img{max-width:100%;height:auto}
 
   function paintMessages(){
     var list = eff();
-    var size = pageSize();
-    var np = pages();
+    var grouped = messagePages();
+    var np = Math.max(1, grouped.length);
     var page = Math.min(state.page, np - 1);
-    var start = page * size;
-    var visible = list.slice(start, start + size);
-    var cols = size === 1 ? "minmax(0,760px)" : (state.isNarrow || state.isCompact) ? "1fr" : "repeat(" + Math.max(1, CONFIG.columns) + ",1fr)";
+    var visible = grouped[page] || [];
+    var cols = visible.length === 1 ? "minmax(0,760px)" : (state.isNarrow || state.isCompact) ? "1fr" : "repeat(" + Math.max(1, CONFIG.columns) + ",1fr)";
 
     var inner;
     if(list.length > 0){
@@ -307,7 +366,7 @@ img{max-width:100%;height:auto}
 
     if(cur.src && isVideo(cur.src)){
       var v = document.createElement("video");
-      v.src = cur.src; v.autoplay = true; v.muted = true; v.playsInline = true; v.setAttribute("playsinline","");
+      v.src = cur.src; v.autoplay = true; v.muted = !state.soundEnabled; v.volume = 1; v.playsInline = true; v.setAttribute("playsinline","");
       v.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;background:#000";
       v.onended = function(){ advancePhoto(); };
       stage.appendChild(v);
@@ -335,6 +394,7 @@ img{max-width:100%;height:auto}
     var wrap = $("photoScene");
     wrap.innerHTML = "";
     wrap.appendChild(stage);
+    syncSceneAudio();
   }
 
   /* ── 頁尾狀態 / 圓點 ──────────────────── */
@@ -368,6 +428,7 @@ img{max-width:100%;height:auto}
       paintPhoto();
     }
     paintChrome();
+    syncSceneAudio();
   }
   function sceneDurationMs(scene){
     var min = scene === "photos" ? CONFIG.photosMinutes : CONFIG.messagesMinutes;
@@ -407,7 +468,9 @@ img{max-width:100%;height:auto}
   function advancePhoto(){
     var n = photos().length;
     if(n <= 1) return;
-    state.photoFading = true; paintPhoto();
+    state.photoFading = true;
+    var stage = $("photoScene").querySelector(".photo-stage");
+    if(stage) stage.style.opacity = 0;
     setTimeout(function(){ state.photoIdx = (state.photoIdx + 1) % n; state.photoFading = false; paintPhoto(); paintChrome(); }, 350);
   }
 
