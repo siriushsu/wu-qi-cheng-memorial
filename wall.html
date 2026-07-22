@@ -77,6 +77,12 @@ img{max-width:100%;height:auto}
   .photo-stage{width:min(100%,calc((100dvh - 105px) * 1.7778)) !important}
   .photo-caption{padding-bottom:12px !important;font-size:17px !important}
 }
+/* 長留言不得截字：內容較高時由主區域捲動，短留言仍維持垂直置中。 */
+.wall-main{overflow-x:hidden !important;overflow-y:auto !important}
+#msgScene{height:auto !important;min-height:100%;align-items:flex-start !important;padding:4px 0}
+.message-grid{margin:auto 0}
+.message-card-text{display:block !important;-webkit-line-clamp:unset !important;-webkit-box-orient:initial !important;overflow:visible !important;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;font-size:var(--message-font-size,18px) !important;line-height:var(--message-line-height,1.7) !important}
+.message-card.long-message .message-photo{max-height:22vh !important;object-fit:contain !important}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
@@ -162,7 +168,13 @@ img{max-width:100%;height:auto}
   function isDemo(){ return !SCRIPT_URL; }
   function eff(){ return isDemo() ? SAMPLES : state.messages; }
   function photos(){ return PHOTOS; }
-  function pageSize(){ return state.isCompact ? 1 : state.isNarrow ? 2 : state.isShort ? Math.max(1, CONFIG.columns) : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage); }
+  function messageLength(m){ return Array.from(String((m && m.message) || "")).length; }
+  function hasLongMessage(){ return eff().some(function(m){ return messageLength(m) > 100; }); }
+  function pageSize(){
+    var base = state.isCompact ? 1 : state.isNarrow ? 2 : state.isShort ? Math.max(1, CONFIG.columns) : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage);
+    // 長留言獨立一頁，避免多張卡片互相擠壓而截斷內容。
+    return hasLongMessage() ? 1 : base;
+  }
   function pages(){ return Math.max(1, Math.ceil(eff().length / pageSize())); }
   function messageId(m){ return String(m.id || [m.time, m.name, m.message].join("|")); }
 
@@ -227,6 +239,11 @@ img{max-width:100%;height:auto}
   /* ── 留言場景 ─────────────────────────── */
   function cardHtml(m, i){
     var nm = (m.name || "匿名").toString();
+    var message = (m.message || "").toString();
+    var chars = messageLength(m);
+    var fontSize = chars > 600 ? 11.5 : chars > 400 ? 12.5 : chars > 260 ? 13.5 : chars > 160 ? 14.5 : chars > 100 ? 16 : 18;
+    var lineHeight = chars > 400 ? 1.38 : chars > 260 ? 1.45 : chars > 160 ? 1.52 : chars > 100 ? 1.58 : 1.7;
+    var longClass = chars > 100 ? " long-message" : "";
     var isNew = !!state.newApprovedIds[messageId(m)];
     var raw = CONFIG.showGuestPhotos ? (m.photo || "").toString() : "";
     var isReal = /^(?:https?:|data:image\/|uploads\/)/i.test(raw);
@@ -244,10 +261,10 @@ img{max-width:100%;height:auto}
       ? '<div class="message-avatar" style="flex:none;width:50px;height:50px;border-radius:50%;background:#EAE1D2;display:flex;align-items:center;justify-content:center;color:#a98b5d;font:500 21px \'Noto Serif TC\'">'+esc(nm.trim().charAt(0) || "友")+'</div>'
       : "";
 
-    return '<div class="message-card" style="background:#F6EEDE;color:#2B2723;border-radius:16px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.42);display:flex;flex-direction:column;gap:14px;border-top:3px solid #C9A45C;animation:'+(isNew?'newGlow 1.4s ease both,':'')+'floatIn .6s ease both;animation-delay:'+delay+'">'
+    return '<div class="message-card'+longClass+'" style="--message-font-size:'+fontSize+'px;--message-line-height:'+lineHeight+';background:#F6EEDE;color:#2B2723;border-radius:16px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.42);display:flex;flex-direction:column;gap:14px;border-top:3px solid #C9A45C;animation:'+(isNew?'newGlow 1.4s ease both,':'')+'floatIn .6s ease both;animation-delay:'+delay+'">'
       + top
       + '<div style="display:flex;align-items:center;gap:13px">' + avatar + '<div class="message-card-name" style="font:600 20px \'Noto Serif TC\',serif;letter-spacing:.03em;color:#8a6f45">'+esc(nm)+'</div>'+(isNew?'<span style="margin-left:auto;flex:none;border:1px solid rgba(169,139,93,.45);border-radius:999px;padding:3px 9px;font:500 11px \'Noto Sans TC\',sans-serif;letter-spacing:.08em;color:#8a6f45">新留言</span>':'')+'</div>'
-      + '<p class="message-card-text" style="margin:0;font:400 18px/1.7 \'Noto Serif TC\',serif;color:#463f34;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty">'+esc(m.message)+'</p>'
+      + '<p class="message-card-text" style="margin:0;font-family:\'Noto Serif TC\',serif;font-weight:400;color:#463f34;text-wrap:pretty">'+esc(message)+'</p>'
       + '</div>';
   }
 
@@ -258,11 +275,11 @@ img{max-width:100%;height:auto}
     var page = Math.min(state.page, np - 1);
     var start = page * size;
     var visible = list.slice(start, start + size);
-    var cols = (state.isNarrow || state.isCompact) ? "1fr" : "repeat(" + Math.max(1, CONFIG.columns) + ",1fr)";
+    var cols = size === 1 ? "minmax(0,760px)" : (state.isNarrow || state.isCompact) ? "1fr" : "repeat(" + Math.max(1, CONFIG.columns) + ",1fr)";
 
     var inner;
     if(list.length > 0){
-      inner = '<div class="message-grid" style="width:100%;max-width:1720px;display:grid;grid-template-columns:'+cols+';gap:24px;align-items:start;opacity:'+(state.fading ? 0 : 1)+';transition:opacity .45s ease">'
+      inner = '<div class="message-grid" style="width:100%;max-width:1720px;display:grid;grid-template-columns:'+cols+';justify-content:center;gap:24px;align-items:start;opacity:'+(state.fading ? 0 : 1)+';transition:opacity .45s ease">'
         + visible.map(cardHtml).join("")
         + '</div>';
     } else if(!isDemo() && state.loaded){
