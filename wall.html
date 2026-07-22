@@ -135,7 +135,9 @@ img{max-width:100%;height:auto}
     rowsPerPage:     2,   // 每頁列數（1–3）
     showGuestPhotos: true,// 是否顯示來賓上傳的照片
     refreshSeconds:  3,   // 每幾秒自動檢查新核可留言（不需重新整理）
-    cardRotateSec:   20,  // 留言卡片換頁秒數（每頁停留秒數；調大＝輪播更慢，讓長留言讀得完）
+    cardMinSec:      6,   // 每頁最短停留秒數（短留言）
+    cardMaxSec:      28,  // 每頁最長停留秒數（很長的留言）
+    cardSecPerChar:  0.18,// 每個字加幾秒：依留言長度自動決定停留多久（字越多停越久）
     photoEverySec:   5    // 照片換張秒數（影片播完才換）
   };
 
@@ -284,6 +286,7 @@ img{max-width:100%;height:auto}
             } else {
               if(state.scene === "messages") paintMessages();
               paintChrome();
+              scheduleRotate();
             }
           }
           else if(!state.loaded){ state.loaded = true; if(state.scene === "messages") paintMessages(); }
@@ -429,6 +432,7 @@ img{max-width:100%;height:auto}
     }
     paintChrome();
     syncSceneAudio();
+    scheduleRotate();
   }
   function sceneDurationMs(scene){
     var min = scene === "photos" ? CONFIG.photosMinutes : CONFIG.messagesMinutes;
@@ -450,12 +454,26 @@ img{max-width:100%;height:auto}
     scheduleScene();
   }
 
-  /* ── 輪播 ─────────────────────────────── */
+  /* ── 輪播（每頁停留時間依留言長度自動決定）───── */
+  function pageDurationMs(){
+    var grouped = messagePages();
+    if(grouped.length <= 1) return 0;
+    var page = Math.min(state.page, grouped.length - 1);
+    var chars = 0;
+    (grouped[page] || []).forEach(function(m){ chars += messageLength(m); });
+    var minMs = Math.max(1, CONFIG.cardMinSec) * 1000;
+    var maxMs = Math.max(CONFIG.cardMinSec, CONFIG.cardMaxSec) * 1000;
+    return Math.min(maxMs, Math.max(minMs, minMs + chars * Math.max(0, CONFIG.cardSecPerChar) * 1000));
+  }
+  function scheduleRotate(){
+    clearTimeout(timers.rot);
+    if(state.scene !== "messages" || pages() <= 1) return;
+    timers.rot = setTimeout(rotate, pageDurationMs());
+  }
   function rotate(){
-    if(state.scene !== "messages") return;
-    if(pages() <= 1) return;
+    if(state.scene !== "messages" || pages() <= 1) return;
     state.fading = true; paintMessages();
-    setTimeout(function(){ state.page = (state.page + 1) % pages(); state.fading = false; paintMessages(); paintChrome(); }, 450);
+    setTimeout(function(){ state.page = (state.page + 1) % pages(); state.fading = false; paintMessages(); paintChrome(); scheduleRotate(); }, 450);
   }
   function nextPhoto(){
     if(state.scene !== "photos") return;
@@ -486,6 +504,7 @@ img{max-width:100%;height:auto}
       state.page = Math.min(state.page, pages() - 1);
       if(state.scene === "messages") paintMessages();
       paintChrome();
+      scheduleRotate();
     }
   }
 
@@ -496,7 +515,7 @@ img{max-width:100%;height:auto}
   applyScene();
   scheduleScene();
   timers.poll = setInterval(load, Math.max(2, CONFIG.refreshSeconds) * 1000);
-  timers.rot  = setInterval(rotate, Math.max(4, CONFIG.cardRotateSec) * 1000);
+  scheduleRotate(); // 依留言長度自動排程換頁（取代固定間隔）
   timers.ptmr = setInterval(nextPhoto, Math.max(3, CONFIG.photoEverySec) * 1000);
   window.addEventListener("focus", load);
   window.addEventListener("online", load);
