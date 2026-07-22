@@ -22,7 +22,7 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 .reveal-enabled .reveal-section.is-visible{opacity:1;transform:none}
 .share-btn{transition:background .2s,color .2s,border-color .2s}
 .share-btn:hover{background:#a98b5d;color:#fff !important;border-color:#a98b5d !important}
-.page-shell{width:100%;min-height:100vh;min-height:100dvh}
+.page-shell{width:100%;max-width:960px !important;min-height:100vh;min-height:100dvh}
 .portrait{height:auto !important;aspect-ratio:auto !important;object-fit:contain !important}
 .memory-grid{align-items:start}
 .memory-grid img{height:auto !important;aspect-ratio:auto !important;object-fit:contain !important;object-position:center !important;align-self:start}
@@ -32,6 +32,29 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 .memory-grid img:nth-child(4){grid-column:2;grid-row:3}
 .memory-grid img:nth-child(5){grid-column:1/3;grid-row:4}
 .notice-link img{height:auto !important;aspect-ratio:auto !important;object-fit:contain !important}
+@media (min-width:760px){
+  .brand-block{padding:38px 64px 6px !important}
+  .hero-section{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(330px,1.1fr);align-items:center;gap:72px;padding:38px 88px 52px !important}
+  .hero-section .portrait{width:100% !important;max-width:310px;margin-left:auto !important;margin-right:auto !important}
+  .hero-copy{text-align:center}
+  .hero-name{font-size:56px !important}
+  .ornament{padding-bottom:38px !important}
+  .intro-section{padding:0 96px 52px !important}
+  .intro-section>p:last-child{max-width:48em;margin-left:auto !important;margin-right:auto !important}
+  .ceremony-section{padding:48px 64px 54px !important}
+  .ceremony-content{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:24px;align-items:stretch}
+  .ceremony-map{margin-top:0 !important;aspect-ratio:auto !important;min-height:100%}
+  .memories-section{padding:48px 64px 40px !important}
+  .memory-grid{gap:14px !important}
+  .notice-section{padding:12px 64px 50px !important}
+  .notice-link{width:min(380px,48%) !important}
+  .thanks-section{padding:42px 80px !important}
+  .closing-section{padding:48px 80px !important}
+  .message-section{padding:52px 64px !important}
+  .message-section>#formWrap,.message-section>#doneWrap{max-width:700px;margin-left:auto;margin-right:auto}
+  .latest-section{max-width:780px;margin-left:auto;margin-right:auto;padding:42px 40px 12px !important}
+  .share-section{padding:34px 40px 40px !important}
+}
 @media (max-width:600px){
   .page-shell{box-shadow:none !important}
   .brand-block{padding:max(24px,env(safe-area-inset-top)) 24px 4px !important}
@@ -89,11 +112,13 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 
   <div class="hero-section" style="padding:20px 40px 30px;text-align:center">
     <img class="portrait" src="uploads/1029開幕活動-337.jpg" alt="吳啓誠先生手持麥克風的身影" width="3569" height="5353" fetchpriority="high" style="width:250px;aspect-ratio:3/4;object-fit:cover;object-position:center top;margin:0 auto;border:1px solid rgba(169,139,93,.5);border-radius:18px;box-shadow:0 12px 36px rgba(80,60,30,.16);display:block;animation:fadeUp 1.1s ease both">
-    <div class="hero-kicker" style="margin-top:24px;font:400 13px 'Noto Sans TC',sans-serif;letter-spacing:.32em;color:#9a8560;padding-left:.32em">我們親愛的父親</div>
-    <h1 class="hero-name" style="margin:8px 0 0;font:500 48px 'Noto Serif TC',serif;letter-spacing:.16em;padding-left:.16em;color:#2B2723">吳啓誠</h1>
-    <div style="margin-top:2px;font:400 16px 'Noto Serif TC';letter-spacing:.5em;padding-left:.5em;color:#6b6055">先　生</div>
-    <div class="hero-date" style="margin-top:18px;font:500 16px 'Cormorant Garamond',serif;letter-spacing:.14em;color:#a98b5d">1963.11.05　─　2026.07.16</div>
-    <div style="margin-top:3px;font:400 12.5px 'Noto Sans TC';letter-spacing:.08em;color:#9a8560">民國 52 年 ─ 115 年　享壽 64 歲</div>
+    <div class="hero-copy">
+      <div class="hero-kicker" style="margin-top:24px;font:400 13px 'Noto Sans TC',sans-serif;letter-spacing:.32em;color:#9a8560;padding-left:.32em">我們親愛的父親</div>
+      <h1 class="hero-name" style="margin:8px 0 0;font:500 48px 'Noto Serif TC',serif;letter-spacing:.16em;padding-left:.16em;color:#2B2723">吳啓誠</h1>
+      <div style="margin-top:2px;font:400 16px 'Noto Serif TC';letter-spacing:.5em;padding-left:.5em;color:#6b6055">先　生</div>
+      <div class="hero-date" style="margin-top:18px;font:500 16px 'Cormorant Garamond',serif;letter-spacing:.14em;color:#a98b5d">1963.11.05　─　2026.07.16</div>
+      <div style="margin-top:3px;font:400 12.5px 'Noto Sans TC';letter-spacing:.08em;color:#9a8560">民國 52 年 ─ 115 年　享壽 64 歲</div>
+    </div>
   </div>
 
   <div class="ornament" style="display:flex;align-items:center;justify-content:center;gap:14px;padding:0 0 30px"><span style="height:1px;width:46px;background:rgba(169,139,93,.55)"></span><span style="width:6px;height:6px;background:#a98b5d;transform:rotate(45deg)"></span><span style="height:1px;width:46px;background:rgba(169,139,93,.55)"></span></div>
@@ -105,14 +130,16 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 
   <div class="ceremony-section reveal-section" style="background:#F2ECE0;padding:36px 40px 40px">
     <div style="text-align:center;margin-bottom:22px"><div style="font:400 12px 'Noto Sans TC';letter-spacing:.4em;color:#a98b5d;padding-left:.4em">CEREMONY</div><h2 style="margin:6px 0 0;font:500 26px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em">弔唁與追思</h2></div>
-    <div class="ceremony-card" style="background:#fff;border:1px solid rgba(169,139,93,.28);border-radius:10px;padding:8px 22px">
-      <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">辭世</span><span style="font:400 14.5px 'Noto Serif TC'">中華民國 115 年 7 月 16 日　享壽 64 歲</span></div>
-      <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">弔唁堂</span><span style="font:400 14.5px 'Noto Serif TC'">7 月 23 日 — 7 月 29 日　每日 10:00 – 17:00</span></div>
-      <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">地點</span><span style="font:400 14.5px 'Noto Serif TC'">臥龍 17 行館<br>臺北市大安區臥龍街 188 巷 17 號 1 樓</span></div>
-      <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">追思會</span><span style="font:400 14.5px 'Noto Serif TC'">115 年 8 月 9 日（星期日）08:40 – 10:00<br><span style="font-size:12.5px;color:#9a8560">通知另發</span></span></div>
-      <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">家屬</span><span style="font:400 14.5px 'Noto Serif TC'">孝男 立凡　孝女 立勻・立心　敬啟</span></div>
+    <div class="ceremony-content">
+      <div class="ceremony-card" style="background:#fff;border:1px solid rgba(169,139,93,.28);border-radius:10px;padding:8px 22px">
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">辭世</span><span style="font:400 14.5px 'Noto Serif TC'">中華民國 115 年 7 月 16 日　享壽 64 歲</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">弔唁堂</span><span style="font:400 14.5px 'Noto Serif TC'">7 月 23 日 — 7 月 29 日　每日 10:00 – 17:00</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">地點</span><span style="font:400 14.5px 'Noto Serif TC'">臥龍 17 行館<br>臺北市大安區臥龍街 188 巷 17 號 1 樓</span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(169,139,93,.16)"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">追思會</span><span style="font:400 14.5px 'Noto Serif TC'">115 年 8 月 9 日（星期日）08:40 – 10:00<br><span style="font-size:12.5px;color:#9a8560">通知另發</span></span></div>
+        <div class="ceremony-row" style="display:flex;gap:14px;padding:13px 0"><span class="ceremony-label" style="flex:none;width:4.2em;font:500 14px 'Noto Sans TC';color:#a98b5d">家屬</span><span style="font:400 14.5px 'Noto Serif TC'">孝男 立凡　孝女 立勻・立心　敬啟</span></div>
+      </div>
+      <div class="ceremony-map" style="margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid rgba(169,139,93,.25);aspect-ratio:16/9;background:#EAE1D2"><iframe title="會場地圖" src="https://maps.google.com/maps?q=%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E8%87%A5%E9%BE%8D%E8%A1%97188%E5%B7%B717%E8%99%9F&amp;z=16&amp;output=embed" style="width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.12)" loading="lazy"></iframe></div>
     </div>
-    <div class="ceremony-map" style="margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid rgba(169,139,93,.25);aspect-ratio:16/9;background:#EAE1D2"><iframe title="會場地圖" src="https://maps.google.com/maps?q=%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E8%87%A5%E9%BE%8D%E8%A1%97188%E5%B7%B717%E8%99%9F&amp;z=16&amp;output=embed" style="width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.12)" loading="lazy"></iframe></div>
   </div>
 
   <div class="memories-section reveal-section" style="padding:38px 40px 30px">
