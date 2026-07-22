@@ -258,7 +258,7 @@ input::placeholder,textarea::placeholder{color:#8f8267}
 
   var $ = function(id){ return document.getElementById(id); };
 
-  var state = { attendees:1, photoData:"", photoName:"", submitting:false, submitted:false, muted:true, live:null };
+  var state = { attendees:1, photoData:"", photoName:"", submitting:false, submitted:false, muted:true, live:null, latestSig:null };
 
   var SAMPLES = [
     {name:"孫維仁", message:"敬悼　吳啓誠先生", photo:"uploads/S__6791288.jpg"},
@@ -349,21 +349,25 @@ input::placeholder,textarea::placeholder{color:#8f8267}
     if(!SHOW_LATEST){ $("latestWrap").style.display = "none"; return; }
     // 已接後端時只顯示 Google Sheets 的已核准留言；尚未收到回應時先顯示載入狀態。
     var raw = state.live !== null ? state.live.slice(0,6) : (SCRIPT_URL ? [] : SAMPLES);
+    var html;
     if(!raw.length){
-      $("latestList").innerHTML = '<div style="padding:22px 16px;text-align:center;border:1px solid rgba(169,139,93,.22);border-radius:10px;background:#fff;color:#8f8267;font:400 13px/1.7 \'Noto Sans TC\'">'+(state.live === null ? '正在讀取留言…' : '目前尚無已核准留言')+'</div>';
-      return;
+      html = '<div style="padding:22px 16px;text-align:center;border:1px solid rgba(169,139,93,.22);border-radius:10px;background:#fff;color:#8f8267;font:400 13px/1.7 \'Noto Sans TC\'">'+(state.live === null ? '正在讀取留言…' : '目前尚無已核准留言')+'</div>';
+    } else {
+      html = raw.map(function(m){
+        var nm = (m.name || "匿名").toString();
+        var photo = (m.photo || "").toString();
+        var avatar = photo
+          ? '<img src="'+esc(photo)+'" alt="'+esc(nm)+' 上傳的照片" style="flex:none;width:68px;height:80px;border-radius:6px;object-fit:contain;background:#201B16;border:1px solid rgba(169,139,93,.22)">'
+          : '<div style="flex:none;width:44px;height:44px;border-radius:50%;background:#EAE1D2;display:flex;align-items:center;justify-content:center;color:#a98b5d;font:500 16px \'Noto Serif TC\'">'+esc(nm.trim().charAt(0) || "友")+'</div>';
+        return '<div style="display:flex;gap:13px;background:#fff;border:1px solid rgba(169,139,93,.22);border-radius:10px;padding:15px 16px;animation:floatIn .5s ease both">'
+          + avatar
+          + '<div style="flex:1;min-width:0"><div style="font:600 14px \'Noto Sans TC\';color:#2B2723">'+esc(nm)+'</div><p style="margin:4px 0 0;font:400 14px/1.7 \'Noto Serif TC\';color:#5c5348">'+esc(m.message)+'</p></div>'
+          + '</div>';
+      }).join("");
     }
-    var html = raw.map(function(m){
-      var nm = (m.name || "匿名").toString();
-      var photo = (m.photo || "").toString();
-      var avatar = photo
-        ? '<img src="'+esc(photo)+'" alt="'+esc(nm)+' 上傳的照片" style="flex:none;width:68px;height:80px;border-radius:6px;object-fit:contain;background:#201B16;border:1px solid rgba(169,139,93,.22)">'
-        : '<div style="flex:none;width:44px;height:44px;border-radius:50%;background:#EAE1D2;display:flex;align-items:center;justify-content:center;color:#a98b5d;font:500 16px \'Noto Serif TC\'">'+esc(nm.trim().charAt(0) || "友")+'</div>';
-      return '<div style="display:flex;gap:13px;background:#fff;border:1px solid rgba(169,139,93,.22);border-radius:10px;padding:15px 16px;animation:floatIn .5s ease both">'
-        + avatar
-        + '<div style="flex:1;min-width:0"><div style="font:600 14px \'Noto Sans TC\';color:#2B2723">'+esc(nm)+'</div><p style="margin:4px 0 0;font:400 14px/1.7 \'Noto Serif TC\';color:#5c5348">'+esc(m.message)+'</p></div>'
-        + '</div>';
-    }).join("");
+    // 內容沒變就不重繪：避免每 5 秒輪詢時整段重建 DOM、卡片重播 floatIn 動畫、照片重載，造成畫面不斷跳動。
+    if(html === state.latestSig) return;
+    state.latestSig = html;
     $("latestList").innerHTML = html;
   }
 
