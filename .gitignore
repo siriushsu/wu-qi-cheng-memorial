@@ -1,0 +1,14 @@
+.DS_Store
+
+# Internal setup/reference files are not part of the public website.
+_專案資訊.html
+Google-Apps-Script.gs
+留言板-設定說明.md
+
+# Keep the optimized web images public; exclude the larger source originals.
+uploads/1.jpg
+uploads/1029開幕活動-337.jpg
+uploads/BLBO0099.jpg
+uploads/BLBO9842.jpg
+uploads/LINE_ALBUM_照片_260721_63.jpg
+uploads/LINE_ALBUM_照片_260721_83.jpg

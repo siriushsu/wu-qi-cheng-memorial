@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>吳啓誠先生 · 追思留言牆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;min-width:280px;width:100%;height:100%;overflow:hidden;background:#1C1814;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+@keyframes floatIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+@keyframes newGlow{0%{box-shadow:0 0 0 2px rgba(201,164,92,.75),0 14px 40px rgba(0,0,0,.42)}100%{box-shadow:0 14px 40px rgba(0,0,0,.42)}}
+.wall-shell{height:100vh;height:100dvh;min-height:0 !important;overflow:hidden}
+.wall-main{min-height:0}
+@media (max-width:900px){
+  .wall-header{justify-content:flex-start !important;gap:16px !important;padding:18px 22px 14px !important;flex-wrap:wrap}
+  .wall-portrait{width:68px !important;border-radius:11px !important}
+  .wall-identity{min-width:0;flex:1}
+  .wall-kicker{font-size:12px !important;letter-spacing:.22em !important;padding-left:.22em !important}
+  .wall-title-row{gap:10px !important;flex-wrap:wrap}
+  .wall-name{font-size:32px !important}
+  .wall-title{font-size:15px !important}
+  .wall-dates{font-size:13.5px !important;letter-spacing:.08em !important}
+  .wall-status{position:static !important;flex-basis:100%;justify-content:center;margin-top:-3px;font-size:12px !important}
+  .wall-main{padding:24px 20px !important}
+  .wall-dots{padding:10px 20px 16px !important}
+  .message-grid{gap:16px !important}
+  .message-card{padding:17px !important;gap:11px !important;border-radius:13px !important}
+  .message-card-name{font-size:18px !important}
+  .message-card-text{font-size:16px !important;line-height:1.65 !important}
+  .message-avatar{width:44px !important;height:44px !important;font-size:18px !important}
+  .photo-caption{padding:46px 24px 20px !important;font-size:21px !important}
+}
+@media (max-width:620px){
+  .wall-header{padding:max(13px,env(safe-area-inset-top)) 16px 10px !important;gap:11px !important}
+  .wall-portrait{width:54px !important;border-radius:9px !important}
+  .wall-kicker{font-size:10.5px !important;letter-spacing:.15em !important;padding-left:.15em !important}
+  .wall-title-row{gap:7px !important;margin-top:1px !important}
+  .wall-name{font-size:25px !important;letter-spacing:.08em !important;padding-left:.08em !important}
+  .wall-title{font-size:13px !important;letter-spacing:.18em !important}
+  .wall-dates{margin-top:2px !important;font-size:11.5px !important;letter-spacing:.035em !important}
+  .wall-status{font-size:11px !important;margin-top:-1px}
+  .wall-status-dot{width:7px !important;height:7px !important}
+  .wall-main{padding:15px 13px !important}
+  .wall-dots{padding:7px 16px max(11px,env(safe-area-inset-bottom)) !important}
+  .message-card{padding:15px !important;gap:9px !important}
+  .message-photo{max-height:30vh !important}
+  .message-card-text{-webkit-line-clamp:5 !important;overflow-wrap:anywhere}
+  .photo-stage{border-radius:12px !important;box-shadow:0 14px 38px rgba(0,0,0,.5) !important}
+  .photo-caption{padding:38px 16px 14px !important;font-size:17px !important;letter-spacing:.03em !important}
+  .empty-state{padding:18px 8px !important}
+  .empty-title{font-size:20px !important;letter-spacing:.03em !important}
+  .empty-copy{font-size:13px !important}
+}
+@media (max-height:560px){
+  .wall-header{justify-content:flex-start !important;gap:14px !important;padding-top:8px !important;padding-bottom:7px !important}
+  .wall-portrait{width:46px !important}
+  .wall-kicker{display:none}
+  .wall-name{font-size:30px !important}
+  .wall-title{font-size:14px !important}
+  .wall-dates{font-size:12px !important;letter-spacing:.06em !important}
+  .wall-status{position:static !important;flex-basis:auto;margin-left:auto !important}
+  .wall-main{padding-top:8px !important;padding-bottom:8px !important}
+  .wall-dots{padding-top:4px !important;padding-bottom:7px !important}
+  .message-card{padding:12px !important}
+  .message-photo{display:none !important}
+  .message-card-text{-webkit-line-clamp:3 !important}
+  .photo-stage{width:min(100%,calc((100dvh - 105px) * 1.7778)) !important}
+  .photo-caption{padding-bottom:12px !important;font-size:17px !important}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="wall-shell" style="min-height:100vh;background:radial-gradient(120% 90% at 50% 0%,#292219 0%,#1C1814 60%);color:#EFE6D6;font-family:'Noto Serif TC',serif;display:flex;flex-direction:column">
+
+  <div class="wall-header" style="display:flex;align-items:center;justify-content:center;gap:26px;padding:24px 40px 20px;border-bottom:1px solid rgba(201,164,92,.2);position:relative">
+    <img class="wall-portrait" src="uploads/portrait.jpg" alt="吳啓誠先生遺照" width="1090" height="1400" style="flex:none;width:88px;aspect-ratio:3/4;object-fit:cover;object-position:center top;border:1px solid rgba(201,164,92,.5);border-radius:14px;display:block">
+    <div class="wall-identity" style="text-align:left">
+      <div class="wall-kicker" style="font:400 13px 'Noto Sans TC',sans-serif;letter-spacing:.34em;color:#c9bfa6;padding-left:.34em">我們親愛的父親</div>
+      <div class="wall-title-row" style="display:flex;align-items:baseline;gap:14px;margin-top:4px"><h1 class="wall-name" style="margin:0;font:500 40px 'Noto Serif TC',serif;letter-spacing:.14em;padding-left:.14em;color:#F5ECDB">吳啓誠</h1><span class="wall-title" style="font:400 17px 'Noto Serif TC';letter-spacing:.3em;color:#c9bfa6">先生</span></div>
+      <div class="wall-dates" style="margin-top:5px;font:500 14.5px 'Cormorant Garamond',serif;letter-spacing:.16em;color:#C9A45C">1963.11.05　─　2026.07.16　·　享壽 64 歲</div>
+    </div>
+    <div class="wall-status" style="position:absolute;top:24px;right:34px;display:flex;align-items:center;gap:9px;font:400 13px 'Noto Sans TC',sans-serif;color:#a99f88"><span class="wall-status-dot" style="width:9px;height:9px;border-radius:50%;background:#C9A45C;animation:pulse 1.8s ease-in-out infinite"></span><span id="headerStatus"></span></div>
+  </div>
+
+  <div class="wall-main" style="flex:1;display:flex;align-items:center;justify-content:center;padding:34px 44px;overflow:hidden">
+    <div id="msgScene" aria-live="polite" aria-atomic="true" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div>
+    <div id="photoScene" style="width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px"></div>
+  </div>
+
+  <div class="wall-dots" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 40px 24px;min-height:20px"><div id="dots" style="display:flex;gap:9px"></div></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ══════════════════ 設定（可自行調整） ══════════════════ */
+
+  // ↓↓↓ 貼上與追思頁相同的 Google Apps Script「網頁應用程式」網址 ↓↓↓
+  var SCRIPT_URL = "";
+
+  var CONFIG = {
+    messagesMinutes: 3,   // 「追思留言牆」場景停留分鐘數
+    photosMinutes:   6,   // 「生命剪影」場景停留分鐘數
+    columns:         3,   // 每頁欄數（1–4）
+    rowsPerPage:     2,   // 每頁列數（1–3）
+    showGuestPhotos: true,// 是否顯示來賓上傳的照片
+    refreshSeconds:  3,   // 每幾秒自動檢查新核可留言（不需重新整理）
+    cardRotateSec:   8,   // 留言卡片換頁秒數
+    photoEverySec:   5    // 照片換張秒數（影片播完才換）
+  };
+
+  /* 留言示意（未接後端時顯示；接上 Apps Script 後由已核可留言取代） */
+  var SAMPLES = [
+    {name:"淑芬 敬上", message:"願您一路好走，我們會永遠記得您溫暖的笑容，謝謝您這一生的付出。", photo:"", ph:true},
+    {name:"建宏", message:"謝謝您這一生的照顧與教導，願天堂沒有病痛，我們會好好照顧自己。", photo:""},
+    {name:"美玲阿姨", message:"啓誠大哥一路好走，您的正直與善良，永遠是我們學習的榜樣。", photo:"", ph:true},
+    {name:"公司同仁 敬輓", message:"感念您多年的提攜與帶領，願您安息，我們會繼續努力。", photo:""},
+    {name:"志偉", message:"叔叔，小時候您總帶我們去釣魚，那些日子我一直記得。願您安好。", photo:"", ph:true},
+    {name:"家瑜", message:"謝謝您把女兒教得這麼好，您是最溫柔的長輩，我們都很想念您。", photo:"", ph:true},
+    {name:"老鄰居 陳伯", message:"幾十年的老鄰居，您的笑聲還在耳邊。一路好走，我的老朋友。", photo:""}
+  ];
+
+  /* 生命剪影：照片或影片。caption 與 position 可依需要調整。 */
+  var PHOTOS = [
+    {src:"uploads/memory-family-lake.jpg", caption:"與家人相伴的珍貴時光", position:"center 58%"},
+    {src:"uploads/memory-smile.jpg", caption:"爽朗的笑容，留在我們心中", position:"66% center"},
+    {src:"uploads/memory-active.jpg", caption:"生活裡總有他的活力與幽默", position:"58% center"},
+    {src:"uploads/memory-speaking.jpg", caption:"認真投入、溫暖待人的身影", position:"50% 32%"},
+    {src:"uploads/memory-travel.jpg", caption:"旅途中相伴的美好回憶", position:"center 52%"}
+  ];
+
+  /* ════════════════════════════════════════════════════════ */
+
+  var isVideo = function(s){ return /\.(mp4|webm|mov|m4v|ogg)(\?|$)/i.test(String(s || "")); };
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; }
+
+  var state = { messages:[], page:0, fading:false, isNarrow:false, isCompact:false, loaded:false, loading:false, scene:"messages", photoIdx:0, photoFading:false, approvedIds:null, newApprovedIds:{} };
+  var msgKey = null;
+  var timers = {};
+
+  /* ── 資料 ─────────────────────────────── */
+  function isDemo(){ return !SCRIPT_URL; }
+  function eff(){ return isDemo() ? SAMPLES : state.messages; }
+  function photos(){ return PHOTOS; }
+  function pageSize(){ return state.isCompact ? 1 : state.isNarrow ? 2 : Math.max(1, CONFIG.columns) * Math.max(1, CONFIG.rowsPerPage); }
+  function pages(){ return Math.max(1, Math.ceil(eff().length / pageSize())); }
+  function messageId(m){ return String(m.id || [m.time, m.name, m.message].join("|")); }
+
+  function load(){
+    if(isDemo()){ state.loaded = true; return; }
+    if(state.loading) return;
+    state.loading = true;
+    var cb = "__wall_" + Math.random().toString(36).slice(2);
+    var s = document.createElement("script");
+    var settled = false;
+    var timeout = setTimeout(finish, 12000);
+    function finish(){
+      if(settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      state.loading = false;
+      try{ delete window[cb]; }catch(e){}
+      if(s.parentNode) s.parentNode.removeChild(s);
+    }
+    window[cb] = function(res){
+      try{
+        if(res && res.messages){
+          var nextIds = {};
+          var newlyApproved = [];
+          res.messages.forEach(function(m){
+            var id = messageId(m);
+            nextIds[id] = true;
+            if(state.approvedIds && !state.approvedIds[id]) newlyApproved.push(id);
+          });
+          var key = JSON.stringify(res.messages.map(function(m){ return [messageId(m), m.name, m.message, m.photo]; }));
+          state.approvedIds = nextIds;
+          if(key !== msgKey){
+            msgKey = key;
+            state.messages = res.messages;
+            state.loaded = true;
+            state.page = 0;
+            if(newlyApproved.length){
+              state.newApprovedIds = {};
+              newlyApproved.forEach(function(id){ state.newApprovedIds[id] = true; });
+              state.scene = "messages";
+              state.fading = false;
+              state.photoFading = false;
+              applyScene();
+              scheduleScene();
+              clearTimeout(timers.newMark);
+              timers.newMark = setTimeout(function(){ state.newApprovedIds = {}; if(state.scene === "messages") paintMessages(); }, 12000);
+            } else {
+              if(state.scene === "messages") paintMessages();
+              paintChrome();
+            }
+          }
+          else if(!state.loaded){ state.loaded = true; if(state.scene === "messages") paintMessages(); }
+        }
+      }catch(e){}
+      finally{ finish(); }
+    };
+    s.onerror = function(){ state.loaded = true; finish(); };
+    s.src = SCRIPT_URL + (SCRIPT_URL.indexOf("?") > -1 ? "&" : "?") + "callback=" + cb + "&t=" + Date.now();
+    document.body.appendChild(s);
+  }
+
+  /* ── 留言場景 ─────────────────────────── */
+  function cardHtml(m, i){
+    var nm = (m.name || "匿名").toString();
+    var isNew = !!state.newApprovedIds[messageId(m)];
+    var raw = CONFIG.showGuestPhotos ? (m.photo || "").toString() : "";
+    var isReal = /^https?:/i.test(raw);
+    var demoPhoto = !isReal && CONFIG.showGuestPhotos && !!m.ph;
+    var noPhoto = !isReal && !demoPhoto;
+    var delay = (i * 0.07).toFixed(2) + "s";
+
+    var top = "";
+    if(isReal){
+      top = '<img class="message-photo" src="'+esc(raw)+'" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:11px;border:1px solid rgba(169,139,93,.3)">';
+    } else if(demoPhoto){
+      top = '<div class="message-photo" style="width:100%;aspect-ratio:4/3;border-radius:11px;background:#EAE1D2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#bca87f"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l1.4-2h7.2L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg><span style="font:400 12px \'Noto Sans TC\',sans-serif">來賓照片</span></div>';
+    }
+    var avatar = noPhoto
+      ? '<div class="message-avatar" style="flex:none;width:50px;height:50px;border-radius:50%;background:#EAE1D2;display:flex;align-items:center;justify-content:center;color:#a98b5d;font:500 21px \'Noto Serif TC\'">'+esc(nm.trim().charAt(0) || "友")+'</div>'
+      : "";
+
+    return '<div class="message-card" style="background:#F6EEDE;color:#2B2723;border-radius:16px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.42);display:flex;flex-direction:column;gap:14px;border-top:3px solid #C9A45C;animation:'+(isNew?'newGlow 1.4s ease both,':'')+'floatIn .6s ease both;animation-delay:'+delay+'">'
+      + top
+      + '<div style="display:flex;align-items:center;gap:13px">' + avatar + '<div class="message-card-name" style="font:600 20px \'Noto Serif TC\',serif;letter-spacing:.03em;color:#8a6f45">'+esc(nm)+'</div>'+(isNew?'<span style="margin-left:auto;flex:none;border:1px solid rgba(169,139,93,.45);border-radius:999px;padding:3px 9px;font:500 11px \'Noto Sans TC\',sans-serif;letter-spacing:.08em;color:#8a6f45">新留言</span>':'')+'</div>'
+      + '<p class="message-card-text" style="margin:0;font:400 18px/1.7 \'Noto Serif TC\',serif;color:#463f34;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty">'+esc(m.message)+'</p>'
+      + '</div>';
+  }
+
+  function paintMessages(){
+    var list = eff();
+    var size = pageSize();
+    var np = pages();
+    var page = Math.min(state.page, np - 1);
+    var start = page * size;
+    var visible = list.slice(start, start + size);
+    var cols = (state.isNarrow || state.isCompact) ? "1fr" : "repeat(" + Math.max(1, CONFIG.columns) + ",1fr)";
+
+    var inner;
+    if(list.length > 0){
+      inner = '<div class="message-grid" style="width:100%;max-width:1720px;display:grid;grid-template-columns:'+cols+';gap:24px;align-items:start;opacity:'+(state.fading ? 0 : 1)+';transition:opacity .45s ease">'
+        + visible.map(cardHtml).join("")
+        + '</div>';
+    } else if(!isDemo() && state.loaded){
+      inner = '<div class="empty-state" style="text-align:center;padding:40px">'
+        + '<div style="width:74px;height:74px;margin:0 auto 24px;border-radius:50%;border:1px solid rgba(201,164,92,.45);display:flex;align-items:center;justify-content:center;color:#C9A45C"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c1.5 2.5 4 4 4 7a4 4 0 0 1-8 0c0-3 2.5-4.5 4-7z"/><path d="M9 21h6"/></svg></div>'
+        + '<p class="empty-title" style="margin:0;font:400 26px/1.7 \'Noto Serif TC\';letter-spacing:.08em;color:#EFE6D6">敬邀親友為　吳啓誠先生　留言</p>'
+        + '<p class="empty-copy" style="margin:14px 0 0;font:400 16px \'Noto Sans TC\',sans-serif;letter-spacing:.1em;color:#a99f88">留言經家屬核可後，將顯示於此</p>'
+        + '</div>';
+    } else {
+      inner = "";
+    }
+    $("msgScene").innerHTML = inner;
+  }
+
+  /* ── 照片場景 ─────────────────────────── */
+  function paintPhoto(){
+    var ph = photos();
+    var pidx = ph.length ? (state.photoIdx % ph.length) : 0;
+    var cur = ph[pidx] || {src:"", caption:""};
+    var cap = (cur.caption || "").toString();
+
+    var stage = document.createElement("div");
+    stage.className = "photo-stage";
+    stage.style.cssText = "width:100%;max-width:1320px;aspect-ratio:16/9;border-radius:18px;overflow:hidden;position:relative;background:#2A241D;box-shadow:0 22px 64px rgba(0,0,0,.55);border:1px solid rgba(201,164,92,.18);opacity:"+(state.photoFading ? 0 : 1)+";transition:opacity .55s ease";
+
+    if(cur.src && isVideo(cur.src)){
+      var v = document.createElement("video");
+      v.src = cur.src; v.autoplay = true; v.muted = true; v.playsInline = true; v.setAttribute("playsinline","");
+      v.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;background:#000";
+      v.onended = function(){ advancePhoto(); };
+      stage.appendChild(v);
+      try{ v.play().catch(function(){}); }catch(e){}
+    } else if(cur.src){
+      var img = document.createElement("img");
+      img.src = cur.src; img.alt = cap;
+      img.style.cssText = "width:100%;height:100%;object-fit:cover;object-position:"+(cur.position || "center")+";display:block;animation:kenburns 12s ease both";
+      stage.appendChild(img);
+    } else {
+      var ph0 = document.createElement("div");
+      ph0.style.cssText = "width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#6b5f4c;background:#2A241D";
+      ph0.innerHTML = '<div style="font:400 15px \'Noto Sans TC\',sans-serif;letter-spacing:.1em">生命剪影 · 待放入照片／影片</div>';
+      stage.appendChild(ph0);
+    }
+
+    if(cap){
+      var ov = document.createElement("div");
+      ov.className = "photo-caption";
+      ov.style.cssText = "position:absolute;left:0;right:0;bottom:0;padding:60px 40px 26px;background:linear-gradient(to top,rgba(20,17,13,.9),transparent);color:#F5ECDB;font:500 26px 'Noto Serif TC',serif;letter-spacing:.06em;text-align:center";
+      ov.textContent = cap;
+      stage.appendChild(ov);
+    }
+
+    var wrap = $("photoScene");
+    wrap.innerHTML = "";
+    wrap.appendChild(stage);
+  }
+
+  /* ── 頁尾狀態 / 圓點 ──────────────────── */
+  function paintChrome(){
+    var list = eff(), ph = photos();
+    var sceneMessages = state.scene === "messages";
+    $("headerStatus").textContent = sceneMessages ? ("追思留言 · " + list.length + " 則祝福") : ("生命剪影 · " + ph.length + " 張");
+
+    var np = pages();
+    var page = Math.min(state.page, np - 1);
+    var pidx = ph.length ? (state.photoIdx % ph.length) : 0;
+    var dots = $("dots");
+    var out = "";
+    if(sceneMessages && np > 1){
+      for(var i=0;i<np;i++){ out += '<span style="width:9px;height:9px;border-radius:50%;background:'+(i===page?"#C9A45C":"rgba(201,164,92,.28)")+';transition:background .4s"></span>'; }
+    } else if(!sceneMessages && ph.length > 1){
+      for(var j=0;j<ph.length;j++){ out += '<span style="width:8px;height:8px;border-radius:50%;background:'+(j===pidx?"#C9A45C":"rgba(201,164,92,.28)")+';transition:background .4s"></span>'; }
+    }
+    dots.innerHTML = out;
+  }
+
+  /* ── 場景切換 ─────────────────────────── */
+  function applyScene(){
+    if(state.scene === "messages"){
+      $("msgScene").style.display = "flex";
+      $("photoScene").style.display = "none";
+      paintMessages();
+    } else {
+      $("msgScene").style.display = "none";
+      $("photoScene").style.display = "flex";
+      paintPhoto();
+    }
+    paintChrome();
+  }
+  function sceneDurationMs(scene){
+    var min = scene === "photos" ? CONFIG.photosMinutes : CONFIG.messagesMinutes;
+    return Math.max(0.2, min) * 60000;
+  }
+  function scheduleScene(){
+    clearTimeout(timers.scene);
+    timers.scene = setTimeout(switchScene, sceneDurationMs(state.scene));
+  }
+  function switchScene(){
+    var hasPhotos = photos().length > 0;
+    var hasMsgs = eff().length > 0 || (!isDemo() && state.loaded);
+    var next = state.scene;
+    if(!hasPhotos) next = "messages";
+    else if(!hasMsgs) next = "photos";
+    else next = state.scene === "messages" ? "photos" : "messages";
+    state.scene = next; state.fading = false; state.photoFading = false;
+    applyScene();
+    scheduleScene();
+  }
+
+  /* ── 輪播 ─────────────────────────────── */
+  function rotate(){
+    if(state.scene !== "messages") return;
+    if(pages() <= 1) return;
+    state.fading = true; paintMessages();
+    setTimeout(function(){ state.page = (state.page + 1) % pages(); state.fading = false; paintMessages(); paintChrome(); }, 450);
+  }
+  function nextPhoto(){
+    if(state.scene !== "photos") return;
+    var ph = photos(), n = ph.length;
+    if(n <= 1) return;
+    var cur = ph[state.photoIdx % n] || {};
+    if(isVideo(cur.src)) return; // 影片播完由 onended 換下一張
+    advancePhoto();
+  }
+  function advancePhoto(){
+    var n = photos().length;
+    if(n <= 1) return;
+    state.photoFading = true; paintPhoto();
+    setTimeout(function(){ state.photoIdx = (state.photoIdx + 1) % n; state.photoFading = false; paintPhoto(); paintChrome(); }, 350);
+  }
+
+  /* ── 視窗寬度 ─────────────────────────── */
+  function onResize(){
+    var n = window.innerWidth < 820;
+    var c = window.innerWidth < 620 || window.innerHeight < 560;
+    if(n !== state.isNarrow || c !== state.isCompact){
+      state.isNarrow = n;
+      state.isCompact = c;
+      state.page = Math.min(state.page, pages() - 1);
+      if(state.scene === "messages") paintMessages();
+      paintChrome();
+    }
+  }
+
+  /* ── 啟動 ─────────────────────────────── */
+  onResize();
+  window.addEventListener("resize", onResize);
+  load();
+  applyScene();
+  scheduleScene();
+  timers.poll = setInterval(load, Math.max(2, CONFIG.refreshSeconds) * 1000);
+  timers.rot  = setInterval(rotate, Math.max(4, CONFIG.cardRotateSec) * 1000);
+  timers.ptmr = setInterval(nextPhoto, Math.max(3, CONFIG.photoEverySec) * 1000);
+  window.addEventListener("focus", load);
+  window.addEventListener("online", load);
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden) load(); });
+})();
+</script>
+</body>
+</html>
